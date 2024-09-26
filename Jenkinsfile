@@ -7,6 +7,7 @@ pipeline {
                 sh 'cd SampleWebApp && mvn test'
             }
         }
+        
         stage('Build') {
             steps {
                 sh 'cd SampleWebApp && mvn clean package'
@@ -15,7 +16,7 @@ pipeline {
         
         stage('Deploy to Tomcat') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tompass', path: '', url: 'http://3.86.218.135:8080/')], contextPath: 'myapp', war: '"**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tompass', path: '', url: 'http://3.86.218.135:8080/')], contextPath: 'myapp', war: '**/*.war'
             }
         }
     }
